@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'binfo-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'binfo-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'buildingInfoGUI';
+    title = 'buildingInfoGUI';
 }

@@ -24,6 +24,7 @@ import {
     AddBuildingFormComponent,
     BuildingViewComponent,
 } from './building-view/building-view.component';
+import { BuildingService } from './building.service';
 import { LevelViewComponent } from './level-view/level-view.component';
 import { RoomViewComponent } from './room-view/room-view.component';
 
@@ -56,7 +57,7 @@ import { RoomViewComponent } from './room-view/room-view.component';
         MatDialogModule,
     ],
     entryComponents: [AddBuildingFormComponent],
-    providers: [],
+    providers: [BuildingService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

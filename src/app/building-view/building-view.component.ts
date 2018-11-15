@@ -1,8 +1,12 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
+import { BuildingService } from './../building.service';
+import { Building } from './../models/building.model';
 
 export interface DialogData {
     id: number;
+    name: string;
 }
 
 @Component({
@@ -10,21 +14,42 @@ export interface DialogData {
     templateUrl: './building-view.component.html',
     styleUrls: ['./building-view.component.scss'],
 })
-export class BuildingViewComponent {
-    constructor(public dialog: MatDialog) {}
-    levels = [];
+export class BuildingViewComponent implements OnInit {
+    constructor(public dialog: MatDialog, public buildingService: BuildingService) {}
+    buildings: Building[] = [];
     id = 0;
+    name = '';
 
     openDialog(): void {
         this.id++;
         const dialogRef = this.dialog.open(AddBuildingFormComponent, {
             width: '250px',
-            data: { id: this.id },
+            data: { id: this.id, name: this.name },
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            console.log(result);
+            if (result) {
+                this.buildingService.createBuilding(result.id, result.name);
+                this.buildings = this.buildingService.getBuildings();
+            }
         });
+    }
+    openEditDialog(id: number): void {
+        const selectedBuilding = this.buildingService.getBuilding(id);
+        const dialogRef = this.dialog.open(AddBuildingFormComponent, {
+            width: '250px',
+            data: selectedBuilding,
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.buildingService.editBuilding(selectedBuilding, result);
+                this.buildings = this.buildingService.getBuildings();
+            }
+        });
+    }
+
+    ngOnInit(): void {
+        this.buildings = this.buildingService.getBuildings();
     }
 }
 

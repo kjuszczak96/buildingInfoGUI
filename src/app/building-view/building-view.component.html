@@ -1,12 +1,22 @@
 <div class="grid-container">
-  <h1 class="mat-h1">Building View</h1>
+    <h1 class="mat-h1">Building View</h1>
 
-  <button mat-fab color="primary" class="btn-fixed-br" (click)="openDialog()">
-    <mat-icon>add</mat-icon>
-  </button>
-  <ol>
-    <li *ngFor="let level of levels">
-      {{ level.name }}
-    </li>
-  </ol>
+    <button mat-fab color="primary" class="btn-fixed-br" (click)="openDialog()">
+        <mat-icon>add</mat-icon>
+    </button>
+
+    <mat-card *ngFor="let building of buildings">
+        <div>
+            <p>Id: {{ building.id }}</p>
+            <p>Name: {{ building.name }}</p>
+        </div>
+        <button
+            mat-mini-fab
+            color="primary"
+            class="btn-inline"
+            (click)="openEditDialog(building.id)"
+        >
+            <mat-icon>edit</mat-icon>
+        </button>
+    </mat-card>
 </div>

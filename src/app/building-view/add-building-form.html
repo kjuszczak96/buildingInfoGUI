@@ -1,5 +1,9 @@
-<h1 mat-dialog-title >Hi {{data.id}}</h1>
+<h1 mat-dialog-title>Add building {{ data.id }}</h1>
+<mat-form-field> <input matInput placeholder="ID" [(ngModel)]="data.id" /> </mat-form-field>
 <mat-form-field>
-    <input matInput [(ngModel)]="data.id">
+    <input matInput placeholder="Name" required [(ngModel)]="data.name" />
 </mat-form-field>
-<button mat-button [mat-dialog-close]="data.id" cdkFocusInitial>Ok</button>
+<mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial color="primary">Save</button>
+    <button mat-button mat-dialog-close>No</button>
+</mat-dialog-actions>

@@ -100,13 +100,17 @@ export class BuildingService {
             .buildingId;
         const buildingIndex = this.findBuildingIndex(building);
         const levelIndex = this.findLevelIndex(buildingIndex, selectedRoom.levelId);
+        const newlevelIndex = this.findLevelIndex(buildingIndex, editedRoom.levelId);
         const roomIndex = this.buildings[buildingIndex].levels[levelIndex].rooms
             .map(room => room.id)
             .indexOf(selectedRoom.id);
 
-        this.buildings[buildingIndex].levels[levelIndex].rooms[roomIndex] = editedRoom;
-
-        // const newBuildingIndex = this.findBuildingIndex(editedLevel.buildingId);
-        // const selectedLevelIndex = this.findLevelIndex(selectedBuildingIndex, selectedLevel.id);
+        if (selectedRoom.levelId !== editedRoom.levelId) {
+            const roomCopy: Room = { ...editedRoom };
+            this.buildings[buildingIndex].levels[levelIndex].rooms.splice(roomIndex, 1);
+            this.buildings[buildingIndex].levels[newlevelIndex].rooms.push(roomCopy);
+        } else {
+            this.buildings[buildingIndex].levels[levelIndex].rooms[roomIndex] = editedRoom;
+        }
     }
 }

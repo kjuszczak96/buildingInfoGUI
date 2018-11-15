@@ -1,0 +1,5 @@
+<h1 mat-dialog-title >Hi {{data.id}}</h1>
+<mat-form-field>
+    <input matInput [(ngModel)]="data.id">
+</mat-form-field>
+<button mat-button [mat-dialog-close]="data.id" cdkFocusInitial>Ok</button>

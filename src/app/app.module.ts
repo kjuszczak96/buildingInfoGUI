@@ -1,9 +1,10 @@
 import { LayoutModule } from '@angular/cdk/layout';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
     MatButtonModule,
     MatCardModule,
+    MatDialogModule,
     MatGridListModule,
     MatIconModule,
     MatInputModule,
@@ -19,13 +20,23 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BuildingViewComponent } from './building-view/building-view.component';
+import {
+    AddBuildingFormComponent,
+    BuildingViewComponent,
+} from './building-view/building-view.component';
 import { LevelViewComponent } from './level-view/level-view.component';
 import { RoomViewComponent } from './room-view/room-view.component';
 
 @NgModule({
-    declarations: [AppComponent, BuildingViewComponent, LevelViewComponent, RoomViewComponent],
+    declarations: [
+        AppComponent,
+        BuildingViewComponent,
+        LevelViewComponent,
+        RoomViewComponent,
+        AddBuildingFormComponent,
+    ],
     imports: [
+        FormsModule,
         BrowserModule,
         BrowserAnimationsModule,
         AppRoutingModule,
@@ -42,7 +53,9 @@ import { RoomViewComponent } from './room-view/room-view.component';
         MatSelectModule,
         MatRadioModule,
         ReactiveFormsModule,
+        MatDialogModule,
     ],
+    entryComponents: [AddBuildingFormComponent],
     providers: [],
     bootstrap: [AppComponent],
 })

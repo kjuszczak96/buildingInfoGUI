@@ -9,6 +9,19 @@
         <div>
             <p>Id: {{ level.id }}</p>
             <p>Name: {{ level.name }}</p>
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title> rooms: </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div *ngFor="let room of level.rooms">
+                    <p>Id: {{ room.id }}</p>
+                    <p>Name: {{ room.name }}</p>
+                    <p>Area: {{ room.area }}</p>
+                    <p>Volume: {{ room.volume }}</p>
+                    <p>Heating power consumption: {{ room.heatingPowerConsumption }}</p>
+                    <p>Illumination power: {{ room.illuminationPower }}</p>
+                </div>
+            </mat-expansion-panel>
         </div>
         <button mat-mini-fab color="primary" class="btn-inline" (click)="openEditDialog(level.id)">
             <mat-icon>edit</mat-icon>

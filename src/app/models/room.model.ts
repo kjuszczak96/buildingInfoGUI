@@ -5,6 +5,7 @@ export class Room {
     volume: number;
     heatingPowerConsumption: number;
     illuminationPower: number;
+    levelId: number;
     constructor(
         id: number,
         name: string,
@@ -12,6 +13,7 @@ export class Room {
         volume: number,
         heatingPowerConsumption: number,
         illuminationPower: number,
+        levelId: number,
     ) {
         this.id = id;
         this.name = name;
@@ -19,5 +21,6 @@ export class Room {
         this.volume = volume;
         this.heatingPowerConsumption = heatingPowerConsumption;
         this.illuminationPower = illuminationPower;
+        this.levelId = levelId;
     }
 }

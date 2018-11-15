@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Room</h1>
+
+<mat-form-field>
+    <mat-select [(ngModel)]="data.levelId" placeholder="Select level">
+        <mat-option *ngFor="let level of levels" [value]="level.id"> {{ level.name }} </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<mat-form-field> <input matInput placeholder="ID" [(ngModel)]="data.id" /> </mat-form-field>
+<mat-form-field> <input matInput placeholder="Name" [(ngModel)]="data.name" /> </mat-form-field>
+<mat-form-field> <input matInput placeholder="Area" [(ngModel)]="data.area" /> </mat-form-field>
+<mat-form-field> <input matInput placeholder="Volume" [(ngModel)]="data.volume" /> </mat-form-field>
+<mat-form-field>
+    <input
+        matInput
+        placeholder="Heating Power Consumption"
+        [(ngModel)]="data.heatingPowerConsumption"
+    />
+</mat-form-field>
+<mat-form-field>
+    <input matInput placeholder="Illumination Power" [(ngModel)]="data.illuminationPower" />
+</mat-form-field>
+<mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial color="primary">Save</button>
+    <button mat-button mat-dialog-close>No</button>
+</mat-dialog-actions>

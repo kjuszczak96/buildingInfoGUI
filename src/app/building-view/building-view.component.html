@@ -17,6 +17,22 @@
                 <div *ngFor="let level of building.levels">
                     <p>id: {{ level.id }}</p>
                     <p>name: {{ level.name }}</p>
+                    <mat-expansion-panel
+                        (opened)="panelOpenState = true"
+                        (closed)="panelOpenState = false"
+                    >
+                        <mat-expansion-panel-header>
+                            <mat-panel-title> rooms: </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div *ngFor="let room of level.rooms">
+                            <p>Id: {{ room.id }}</p>
+                            <p>Name: {{ room.name }}</p>
+                            <p>Area: {{ room.area }}</p>
+                            <p>Volume: {{ room.volume }}</p>
+                            <p>Heating power consumption: {{ room.heatingPowerConsumption }}</p>
+                            <p>Illumination power: {{ room.illuminationPower }}</p>
+                        </div>
+                    </mat-expansion-panel>
                 </div>
             </mat-expansion-panel>
         </div>

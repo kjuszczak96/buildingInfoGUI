@@ -1,8 +1,20 @@
 <div class="grid-container">
-  <h1 class="mat-h1">Room View</h1>
+    <h1 class="mat-h1">Room View</h1>
 
-  <button mat-fab color="primary" class="btn-fixed-br">
-    <mat-icon>add</mat-icon>
-  </button>
+    <button mat-fab color="primary" class="btn-fixed-br" (click)="openDialog()">
+        <mat-icon>add</mat-icon>
+    </button>
+    <mat-card *ngFor="let room of rooms">
+        <div>
+            <p>Id: {{ room.id }}</p>
+            <p>Name: {{ room.name }}</p>
+            <p>Area: {{ room.area }}</p>
+            <p>Volume: {{ room.volume }}</p>
+            <p>Heating power consumption: {{ room.heatingPowerConsumption }}</p>
+            <p>Illumination power: {{ room.illuminationPower }}</p>
+        </div>
+        <button mat-mini-fab color="primary" class="btn-inline" (click)="openEditDialog(room.id)">
+            <mat-icon>edit</mat-icon>
+        </button>
+    </mat-card>
 </div>
-  

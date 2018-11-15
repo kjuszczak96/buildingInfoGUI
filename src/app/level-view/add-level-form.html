@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Level</h1>
+<mat-form-field>
+    <mat-select [(ngModel)]="data.buildingId" placeholder="Select building">
+        <mat-option *ngFor="let building of buildings" [value]="building.id">
+            {{ building.name }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field> <input matInput placeholder="ID" [(ngModel)]="data.id" /> </mat-form-field>
+<mat-form-field>
+    <input matInput placeholder="Name" required [(ngModel)]="data.name" />
+</mat-form-field>
+<mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial color="primary">Save</button>
+    <button mat-button mat-dialog-close>No</button>
+</mat-dialog-actions>

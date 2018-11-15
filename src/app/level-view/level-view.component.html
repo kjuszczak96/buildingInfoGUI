@@ -1,8 +1,17 @@
 <div class="grid-container">
     <h1 class="mat-h1">Level View</h1>
-  
-    <button mat-fab color="primary" class="btn-fixed-br">
-      <mat-icon>add</mat-icon>
+
+    <button mat-fab color="primary" class="btn-fixed-br" (click)="openDialog()">
+        <mat-icon>add</mat-icon>
     </button>
-  </div>
-  
+
+    <mat-card *ngFor="let level of levels">
+        <div>
+            <p>Id: {{ level.id }}</p>
+            <p>Name: {{ level.name }}</p>
+        </div>
+        <button mat-mini-fab color="primary" class="btn-inline" (click)="openEditDialog(level.id)">
+            <mat-icon>edit</mat-icon>
+        </button>
+    </mat-card>
+</div>

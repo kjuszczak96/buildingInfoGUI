@@ -25,7 +25,7 @@ import {
     BuildingViewComponent,
 } from './building-view/building-view.component';
 import { BuildingService } from './building.service';
-import { LevelViewComponent } from './level-view/level-view.component';
+import { AddLevelFormComponent, LevelViewComponent } from './level-view/level-view.component';
 import { RoomViewComponent } from './room-view/room-view.component';
 
 @NgModule({
@@ -35,6 +35,7 @@ import { RoomViewComponent } from './room-view/room-view.component';
         LevelViewComponent,
         RoomViewComponent,
         AddBuildingFormComponent,
+        AddLevelFormComponent,
     ],
     imports: [
         FormsModule,
@@ -56,7 +57,7 @@ import { RoomViewComponent } from './room-view/room-view.component';
         ReactiveFormsModule,
         MatDialogModule,
     ],
-    entryComponents: [AddBuildingFormComponent],
+    entryComponents: [AddBuildingFormComponent, AddLevelFormComponent],
     providers: [BuildingService],
     bootstrap: [AppComponent],
 })

@@ -36,20 +36,20 @@ export class LevelViewComponent implements OnInit {
             if (result) {
                 this.buildingService.addLevel(result.buildingId, result.id, result.name);
                 this.levels = this.buildingService.getLevels();
+                this.id++;
             }
         });
     }
 
     openEditDialog(id: number): void {
         const selectedLevel = this.buildingService.getLevel(id);
-        const building = this.buildingService.findBuildingWithLevel(selectedLevel);
         const dialogRef = this.dialog.open(AddLevelFormComponent, {
             width: '250px',
-            data: { buildingId: building.id, ...selectedLevel },
+            data: { ...selectedLevel },
         });
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
-                this.buildingService.editLevel(selectedLevel, result);
+                this.buildingService.editLevel({ ...selectedLevel }, { ...result });
                 this.levels = this.buildingService.getLevels();
             }
         });

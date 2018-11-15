@@ -5,7 +5,7 @@ import { Level } from './models/level.model';
 
 @Injectable()
 export class BuildingService {
-    private buildings: Building[] = [];
+    private buildings: Building[] = [new Building(1, 'pierwszy'), new Building(2, 'drugi')];
 
     getBuildings(): Building[] {
         return this.buildings.slice();
@@ -15,10 +15,12 @@ export class BuildingService {
         return { ...this.buildings.find(building => building.id === id) };
     }
 
+    findIndex(buildingId): number {
+        return this.buildings.map(building => building.id).indexOf(buildingId);
+    }
+
     editBuilding(selectedBuilding: Building, editedBuilding: Building): void {
-        const selectedBuildingIndex = this.buildings
-            .map(building => building.id)
-            .indexOf(selectedBuilding.id);
+        const selectedBuildingIndex = this.findIndex(selectedBuilding.id);
         this.buildings[selectedBuildingIndex].id = editedBuilding.id;
         this.buildings[selectedBuildingIndex].name = editedBuilding.name;
     }
@@ -41,29 +43,28 @@ export class BuildingService {
         const selectedBuildingIndex = this.buildings
             .map(building => building.id)
             .indexOf(buildingId);
-        this.buildings[selectedBuildingIndex].levels.push(new Level(levelId, name));
-    }
-
-    findBuildingWithLevel(selectedLevel): Building {
-        return this.buildings.find(building => {
-            if (building.levels.find(level => level.id === selectedLevel.id)) {
-                return true;
-            }
-        });
+        this.buildings[selectedBuildingIndex].levels.push(new Level(levelId, name, buildingId));
     }
 
     editLevel(selectedLevel: Level, editedLevel: Level): void {
-        const selectedLevelIndex = this.getLevels()
+        const selectedBuildingIndex = this.findIndex(selectedLevel.buildingId);
+        const newBuildingIndex = this.findIndex(editedLevel.buildingId);
+
+        const selectedLevelIndex = this.buildings[selectedBuildingIndex].levels
             .map(level => level.id)
             .indexOf(selectedLevel.id);
 
-        const buildingWithLevel = this.findBuildingWithLevel(selectedLevel);
-
-        const selectedBuildingIndex = this.buildings
-            .map(building => building.id)
-            .indexOf(buildingWithLevel.id);
-
-        this.buildings[selectedBuildingIndex].levels[selectedLevelIndex].id = editedLevel.id;
-        this.buildings[selectedBuildingIndex].levels[selectedLevelIndex].name = editedLevel.name;
+        if (selectedLevel.buildingId !== editedLevel.buildingId) {
+            const newLvl: Level = { ...selectedLevel };
+            newLvl.id = editedLevel.id;
+            newLvl.name = editedLevel.name;
+            newLvl.buildingId = editedLevel.buildingId;
+            this.buildings[selectedBuildingIndex].levels.splice(selectedLevelIndex, 1);
+            this.buildings[newBuildingIndex].levels.push(newLvl);
+        } else {
+            this.buildings[selectedBuildingIndex].levels[selectedLevelIndex].id = editedLevel.id;
+            this.buildings[selectedBuildingIndex].levels[selectedLevelIndex].name =
+                editedLevel.name;
+        }
     }
 }

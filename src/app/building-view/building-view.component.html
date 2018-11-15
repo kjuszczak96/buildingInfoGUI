@@ -9,6 +9,16 @@
         <div>
             <p>Id: {{ building.id }}</p>
             <p>Name: {{ building.name }}</p>
+
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title> levels: </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div *ngFor="let level of building.levels">
+                    <p>id: {{ level.id }}</p>
+                    <p>name: {{ level.name }}</p>
+                </div>
+            </mat-expansion-panel>
         </div>
         <button
             mat-mini-fab

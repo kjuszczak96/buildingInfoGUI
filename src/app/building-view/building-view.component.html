@@ -5,15 +5,17 @@
         <mat-icon>add</mat-icon>
     </button>
 
-    <mat-card *ngFor="let building of buildings">
+    <mat-card *ngFor="let building of (buildings$ | async)">
         <div>
-            <p>Id: {{ building.id }}</p>
+            <p *ngIf="building.id">Id: {{ building.id }}</p>
+
             <p>Name: {{ building.name }}</p>
 
             <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                 <mat-expansion-panel-header>
                     <mat-panel-title> levels: </mat-panel-title>
                 </mat-expansion-panel-header>
+
                 <div *ngFor="let level of building.levels">
                     <p>id: {{ level.id }}</p>
                     <p>name: {{ level.name }}</p>
@@ -36,13 +38,23 @@
                 </div>
             </mat-expansion-panel>
         </div>
-        <button
-            mat-mini-fab
-            color="primary"
-            class="btn-inline"
-            (click)="openEditDialog(building.id)"
-        >
-            <mat-icon>edit</mat-icon>
-        </button>
+
+        <mat-dialog-actions>
+            <button mat-mini-fab color="primary" class="btn-inline" (click)="getArea(building)">
+                m<span class="superscript">2</span>
+            </button>
+
+            <button mat-mini-fab color="primary" class="btn-inline" (click)="getVolume(building)">
+                m<span class="superscript">3</span>
+            </button>
+
+            <button mat-mini-fab color="primary" class="btn-inline" (click)="getIlluminationPower(building)">
+                <mat-icon>brightness_low</mat-icon>
+            </button>
+            
+            <button mat-mini-fab color="primary" class="btn-inline" (click)="openDialog(building)">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </mat-dialog-actions>
     </mat-card>
 </div>

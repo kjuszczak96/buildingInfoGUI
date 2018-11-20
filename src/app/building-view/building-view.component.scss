@@ -3,11 +3,18 @@
 }
 
 .btn-fixed-br {
-    position: absolute;
+    position: fixed;
     right: 30px;
     bottom: 30px;
+    z-index: 10;
+}
+
+.superscript {
+    font-size: 0.65em;
+    position: relative;
+    top: -0.5em;
 }
 
 .btn-inline {
-    margin-left: 30px;
+    margin: 10px;
 }

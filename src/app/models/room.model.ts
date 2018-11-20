@@ -1,26 +1,14 @@
-export class Room {
-    id: number;
-    name: string;
-    area: number;
-    volume: number;
-    heatingPowerConsumption: number;
-    illuminationPower: number;
-    levelId: number;
+import { AbstractLocation } from './abstract-location.model';
+
+export class Room extends AbstractLocation {
     constructor(
         id: number,
         name: string,
-        area: number,
-        volume: number,
-        heatingPowerConsumption: number,
-        illuminationPower: number,
-        levelId: number,
+        private area: number,
+        private volume: number,
+        private heatingPowerConsumption: number,
+        private illuminationPower: number,
     ) {
-        this.id = id;
-        this.name = name;
-        this.area = area;
-        this.volume = volume;
-        this.heatingPowerConsumption = heatingPowerConsumption;
-        this.illuminationPower = illuminationPower;
-        this.levelId = levelId;
+        super(id, name);
     }
 }

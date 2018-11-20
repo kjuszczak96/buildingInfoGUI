@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
-import { BuildingService } from '../building.service';
 import { Room } from '../models/room.model';
+import { LocationService } from '../services/location.service';
 
 import { Level } from './../models/level.model';
 
@@ -22,52 +22,48 @@ export interface DialogData {
     styleUrls: ['./room-view.component.scss'],
 })
 export class RoomViewComponent implements OnInit {
-    constructor(public dialog: MatDialog, public buildingService: BuildingService) {}
-    rooms: Room[] = [];
-    id = 0;
-    name = '';
-    levelId = 0;
-
-    openDialog(): void {
-        this.id++;
-        const dialogRef = this.dialog.open(AddRoomFormComponent, {
-            width: '250px',
-            data: { levelId: this.levelId, id: this.id, name: this.name },
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
-            if (result) {
-                this.buildingService.addRoom(
-                    result.id,
-                    result.name,
-                    result.area,
-                    result.volume,
-                    result.heatingPowerConsumption,
-                    result.illuminationPower,
-                    result.levelId,
-                );
-                this.rooms = this.buildingService.getRooms();
-                this.id++;
-            }
-        });
-    }
-
-    openEditDialog(id: number): void {
-        const selectedRoom = this.buildingService.getRoom(id);
-        const dialogRef = this.dialog.open(AddRoomFormComponent, {
-            width: '250px',
-            data: { ...selectedRoom },
-        });
-        dialogRef.afterClosed().subscribe(result => {
-            if (result) {
-                this.buildingService.editRoom({ ...selectedRoom }, { ...result });
-                this.rooms = this.buildingService.getRooms();
-            }
-        });
-    }
-
+    // constructor(public dialog: MatDialog, public buildingService: BuildingService) {}
+    // rooms: Room[] = [];
+    // id = 0;
+    // name = '';
+    // levelId = 0;
+    // openDialog(): void {
+    //     this.id++;
+    //     const dialogRef = this.dialog.open(AddRoomFormComponent, {
+    //         width: '250px',
+    //         data: { levelId: this.levelId, id: this.id, name: this.name },
+    //     });
+    //     dialogRef.afterClosed().subscribe(result => {
+    //         if (result) {
+    //             this.buildingService.addRoom(
+    //                 result.id,
+    //                 result.name,
+    //                 result.area,
+    //                 result.volume,
+    //                 result.heatingPowerConsumption,
+    //                 result.illuminationPower,
+    //                 result.levelId,
+    //             );
+    //             this.rooms = this.buildingService.getRooms();
+    //             this.id++;
+    //         }
+    //     });
+    // }
+    // openEditDialog(id: number): void {
+    //     const selectedRoom = this.buildingService.getRoom(id);
+    //     const dialogRef = this.dialog.open(AddRoomFormComponent, {
+    //         width: '250px',
+    //         data: { ...selectedRoom },
+    //     });
+    //     dialogRef.afterClosed().subscribe(result => {
+    //         if (result) {
+    //             this.buildingService.editRoom({ ...selectedRoom }, { ...result });
+    //             this.rooms = this.buildingService.getRooms();
+    //         }
+    //     });
+    // }
     ngOnInit(): void {
-        this.rooms = this.buildingService.getRooms();
+        //     this.rooms = this.buildingService.getRooms();
     }
 }
 @Component({
@@ -75,12 +71,12 @@ export class RoomViewComponent implements OnInit {
     templateUrl: 'add-room-form.html',
 })
 export class AddRoomFormComponent {
-    levels: Level[] = [];
-    constructor(
-        public dialogRef: MatDialogRef<AddRoomFormComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: DialogData,
-        private buildingService: BuildingService,
-    ) {
-        this.levels = this.buildingService.getLevels();
-    }
+    //     levels: Level[] = [];
+    //     constructor(
+    //         public dialogRef: MatDialogRef<AddRoomFormComponent>,
+    //         @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    //         private buildingService: BuildingService,
+    //     ) {
+    //         this.levels = this.buildingService.getLevels();
+    //     }
 }

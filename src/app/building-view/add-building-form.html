@@ -1,9 +1,39 @@
-<h1 mat-dialog-title>Add building {{ data.id }}</h1>
-<mat-form-field> <input matInput placeholder="ID" [(ngModel)]="data.id" /> </mat-form-field>
-<mat-form-field>
-    <input matInput placeholder="Name" required [(ngModel)]="data.name" />
-</mat-form-field>
-<mat-dialog-actions>
-    <button mat-button [mat-dialog-close]="data" cdkFocusInitial color="primary">Save</button>
-    <button mat-button mat-dialog-close>No</button>
-</mat-dialog-actions>
+<h1 mat-dialog-title>
+    {{data ? 'Edit' : 'Add'}} building
+</h1>
+
+<div *ngIf="buildingForm.get('id').status === 'PENDING'">
+    Checking...
+</div>
+
+<form [formGroup]="buildingForm" (ngSubmit)="onSubmit()" style="display:flex; flex-direction: column">
+    <mat-form-field>
+        <input type="number" matInput placeholder="ID" formControlName="id" errorStateMatcher/>
+
+        <mat-error *ngIf="buildingForm.controls['id'].errors?.idTaken">
+            Id is already taken
+        </mat-error>
+
+        <mat-error *ngIf="buildingForm.controls['id'].errors?.required">
+            This field is required
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input type="text" matInput placeholder="Name" formControlName="name" errorStateMatcher/>
+
+        <mat-error *ngIf="buildingForm.controls['name'].errors?.required">
+            This field is required
+        </mat-error>
+    </mat-form-field>
+
+    <mat-dialog-actions>
+        <button mat-button [disabled]="buildingForm.invalid || buildingForm.pending" color="primary">
+            {{data ? 'Save' : 'Add'}}
+        </button>
+
+        <button mat-button mat-dialog-close>
+            Cancel
+        </button>
+    </mat-dialog-actions>
+</form>

@@ -1,13 +1,8 @@
+import { AbstractLocation } from './abstract-location.model';
 import { Level } from './level.model';
 
-export class Building {
-    id: number;
-    name: string;
-    levels: Level[];
-
-    constructor(id: number, name: string) {
-        this.id = id;
-        this.name = name;
-        this.levels = [];
+export class Building extends AbstractLocation {
+    constructor(id: number, name: string, private levels: Level[] = []) {
+        super(id, name);
     }
 }

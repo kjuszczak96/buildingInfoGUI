@@ -33,7 +33,7 @@ export abstract class LocationService<T extends AbstractLocation> {
     getIlluminationPower(location: T): Observable<number> {
         return this.http
             .post<number>(
-                `${this.baseEndpoint}${this.endpoint}` + 'get_illumination_power',
+                `${this.baseEndpoint}${this.endpoint}` + '/get_illumination_power',
                 location,
                 httpOptions,
             )
@@ -43,7 +43,7 @@ export abstract class LocationService<T extends AbstractLocation> {
     getArea(location: T): Observable<number> {
         return this.http
             .post<number>(
-                `${this.baseEndpoint}${this.endpoint}` + 'get_area',
+                `${this.baseEndpoint}${this.endpoint}` + '/get_area',
                 location,
                 httpOptions,
             )
@@ -53,11 +53,23 @@ export abstract class LocationService<T extends AbstractLocation> {
     getVolume(location: T): Observable<number> {
         return this.http
             .post<number>(
-                `${this.baseEndpoint}${this.endpoint}` + 'get_volume',
+                `${this.baseEndpoint}${this.endpoint}` + '/get_volume',
                 location,
                 httpOptions,
             )
             .pipe(catchError(err => this.handleError('get_volume', err)));
+    }
+
+    get(id: number): Observable<T> {
+        return this.locations.pipe(
+            delay(100),
+            map(res => {
+                return res.find(el => {
+                    return el.id === id;
+                });
+            }),
+            take(1),
+        );
     }
 
     getAll(): Observable<T[]> {
@@ -88,7 +100,7 @@ export abstract class LocationService<T extends AbstractLocation> {
         );
     }
 
-    edit(id: number, location: T): void {
+    replace(id: number, location: T): void {
         this.remove(id);
         this.add(location);
     }

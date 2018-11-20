@@ -25,12 +25,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {
-    AddBuildingFormComponent,
+    AddBuildingComponent,
+    AddLevelComponent,
+    AddRoomComponent,
     BuildingViewComponent,
-} from './building-view/building-view.component';
-import { AddLevelFormComponent, LevelViewComponent } from './level-view/level-view.component';
-import { AddRoomFormComponent, RoomViewComponent } from './room-view/room-view.component';
-import { BuildingService } from './services/building.service';
+    LevelViewComponent,
+    MsgModalComponent,
+    RoomViewComponent,
+} from './components';
+import { BuildingService, LevelService, RoomService } from './services';
 
 @NgModule({
     declarations: [
@@ -38,9 +41,10 @@ import { BuildingService } from './services/building.service';
         BuildingViewComponent,
         LevelViewComponent,
         RoomViewComponent,
-        AddBuildingFormComponent,
-        AddLevelFormComponent,
-        AddRoomFormComponent,
+        AddBuildingComponent,
+        AddLevelComponent,
+        AddRoomComponent,
+        MsgModalComponent,
     ],
     imports: [
         FormsModule,
@@ -64,9 +68,11 @@ import { BuildingService } from './services/building.service';
         MatExpansionModule,
         HttpClientModule,
     ],
-    entryComponents: [AddBuildingFormComponent, AddLevelFormComponent, AddRoomFormComponent],
+    entryComponents: [AddBuildingComponent, AddLevelComponent, AddRoomComponent, MsgModalComponent],
     providers: [
         BuildingService,
+        LevelService,
+        RoomService,
         { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
     ],
     bootstrap: [AppComponent],

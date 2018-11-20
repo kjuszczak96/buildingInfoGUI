@@ -4,10 +4,10 @@ export class Room extends AbstractLocation {
     constructor(
         id: number,
         name: string,
-        private area: number,
-        private volume: number,
-        private heatingPowerConsumption: number,
-        private illuminationPower: number,
+        public area: number,
+        public volume: number,
+        public heatingPowerConsumption: number,
+        public illuminationPower: number,
     ) {
         super(id, name);
     }

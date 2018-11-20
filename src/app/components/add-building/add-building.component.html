@@ -2,13 +2,13 @@
     {{data ? 'Edit' : 'Add'}} building
 </h1>
 
-<div *ngIf="buildingForm.get('id').status === 'PENDING'">
-    Checking...
-</div>
-
 <form [formGroup]="buildingForm" (ngSubmit)="onSubmit()" style="display:flex; flex-direction: column">
     <mat-form-field>
         <input type="number" matInput placeholder="ID" formControlName="id" errorStateMatcher/>
+
+        <mat-hint *ngIf="buildingForm.get('id').status === 'PENDING'">
+            Checking...
+        </mat-hint>
 
         <mat-error *ngIf="buildingForm.controls['id'].errors?.idTaken">
             Id is already taken

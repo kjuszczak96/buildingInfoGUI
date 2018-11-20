@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { BuildingViewComponent } from './building-view/building-view.component';
-import { LevelViewComponent } from './level-view/level-view.component';
-import { RoomViewComponent } from './room-view/room-view.component';
+import { BuildingViewComponent, LevelViewComponent, RoomViewComponent } from './components';
 
 const routes: Routes = [
     { path: '', redirectTo: 'building', pathMatch: 'full' },

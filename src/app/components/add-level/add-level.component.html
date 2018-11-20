@@ -1,0 +1,47 @@
+<h1 mat-dialog-title>
+    {{data ? 'Edit' : 'Add'}} level
+</h1>
+
+<form [formGroup]="levelForm" (ngSubmit)="onSubmit()" style="display:flex; flex-direction: column">
+    <mat-form-field>
+        <input type="number" matInput placeholder="ID" formControlName="id" errorStateMatcher/>
+
+        <mat-hint *ngIf="levelForm.get('id').status === 'PENDING'">
+            Checking...
+        </mat-hint>
+
+        <mat-error *ngIf="levelForm.controls['id'].errors?.idTaken">
+            Id is already taken
+        </mat-error>
+
+        <mat-error *ngIf="levelForm.controls['id'].errors?.required">
+            This field is required
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input type="text" matInput placeholder="Name" formControlName="name" errorStateMatcher/>
+
+        <mat-error *ngIf="levelForm.controls['name'].errors?.required">
+            This field is required
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select formControlName="buildingId" placeholder="Select building">
+            <mat-option *ngFor="let building of (buildings$ | async)" [value]="building.id">
+                {{ building.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-dialog-actions>
+        <button mat-button [disabled]="levelForm.invalid || levelForm.pending" color="primary">
+            {{data ? 'Save' : 'Add'}}
+        </button>
+
+        <button mat-button mat-dialog-close>
+            Cancel
+        </button>
+    </mat-dialog-actions>
+</form>

@@ -5,18 +5,16 @@
         <mat-icon>add</mat-icon>
     </button>
 
-    <mat-card *ngFor="let building of (buildings$ | async)">
+    <mat-card *ngFor="let location of (locations$ | async)">
         <div>
-            <p *ngIf="building.id">Id: {{ building.id }}</p>
-
-            <p>Name: {{ building.name }}</p>
-
+            <p>Id: {{ location.id }}</p>
+            <p>Name: {{ location.name }}</p>
             <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                 <mat-expansion-panel-header>
                     <mat-panel-title> levels: </mat-panel-title>
                 </mat-expansion-panel-header>
 
-                <div *ngFor="let level of building.levels">
+                <div *ngFor="let level of location.levels">
                     <p>id: {{ level.id }}</p>
                     <p>name: {{ level.name }}</p>
                     <mat-expansion-panel
@@ -40,19 +38,19 @@
         </div>
 
         <mat-dialog-actions>
-            <button mat-mini-fab color="primary" class="btn-inline" (click)="getArea(building)">
+            <button mat-mini-fab color="primary" class="btn-inline" (click)="getArea(location)">
                 m<span class="superscript">2</span>
             </button>
 
-            <button mat-mini-fab color="primary" class="btn-inline" (click)="getVolume(building)">
+            <button mat-mini-fab color="primary" class="btn-inline" (click)="getVolume(location)">
                 m<span class="superscript">3</span>
             </button>
 
-            <button mat-mini-fab color="primary" class="btn-inline" (click)="getIlluminationPower(building)">
+            <button mat-mini-fab color="primary" class="btn-inline" (click)="getIlluminationPower(location)">
                 <mat-icon>brightness_low</mat-icon>
             </button>
             
-            <button mat-mini-fab color="primary" class="btn-inline" (click)="openDialog(building)">
+            <button mat-mini-fab color="primary" class="btn-inline" (click)="openDialog(location)">
                 <mat-icon>edit</mat-icon>
             </button>
         </mat-dialog-actions>

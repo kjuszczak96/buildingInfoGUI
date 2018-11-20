@@ -1,0 +1,79 @@
+<h1 mat-dialog-title>
+    {{data ? 'Edit' : 'Add'}} room
+</h1>
+
+<form [formGroup]="roomForm" (ngSubmit)="onSubmit()" style="display:flex; flex-direction: column">
+    <mat-form-field>
+        <input type="number" matInput placeholder="ID" formControlName="id" errorStateMatcher/>
+
+        <mat-hint *ngIf="roomForm.get('id').status === 'PENDING'">
+            Checking...
+        </mat-hint>
+
+        <mat-error *ngIf="roomForm.controls['id'].errors?.idTaken">
+            Id is already taken
+        </mat-error>
+
+        <mat-error *ngIf="roomForm.controls['id'].errors?.required">
+            This field is required
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input type="text" matInput placeholder="Name" formControlName="name" errorStateMatcher/>
+
+        <mat-error *ngIf="roomForm.controls['name'].errors?.required">
+            This field is required
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select formControlName="levelId" placeholder="Select level">
+            <mat-option *ngFor="let level of (levels$ | async)" [value]="level.id">
+                {{ level.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input type="number" matInput placeholder="Area" formControlName="area"/>
+
+        <mat-error *ngIf="roomForm.controls['id'].errors?.required">
+            This field is required
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input type="number" matInput placeholder="Volume" formControlName="volume"/>
+
+        <mat-error *ngIf="roomForm.controls['id'].errors?.required">
+            This field is required
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input type="number" matInput placeholder="Heating Power Consumption" formControlName="heatingPowerConsumption"/>
+
+        <mat-error *ngIf="roomForm.controls['id'].errors?.required">
+            This field is required
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input type="number" matInput placeholder="Illumination Power" formControlName="illuminationPower"/>
+
+        <mat-error *ngIf="roomForm.controls['id'].errors?.required">
+            This field is required
+        </mat-error>
+    </mat-form-field>
+
+    <mat-dialog-actions>
+        <button mat-button [disabled]="roomForm.invalid || roomForm.pending" color="primary">
+            {{data ? 'Save' : 'Add'}}
+        </button>
+
+        <button mat-button mat-dialog-close>
+            Cancel
+        </button>
+    </mat-dialog-actions>
+</form>
